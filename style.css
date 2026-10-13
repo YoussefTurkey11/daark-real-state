@@ -1,0 +1,930 @@
+/* ====== Reset ====== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ====== CSS variables ====== */
+:root {
+    --primary: #1e6f5c;
+    --primary-dark: #155244;
+    --accent: #d97706;
+    --dark: #1f2937;
+    --gray: #6b7280;
+    --light: #f3f4f6;
+    --white: #ffffff;
+    --border: #d1d5db;
+    --error: #dc2626;
+    --success: #16a34a;
+    --whatsapp: #25d366;
+    --radius: 12px;
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+html {
+    scroll-behavior: smooth;
+    /* عشان الـ header الثابت ما يغطيش عنوان القسم لما تدوس على لينك */
+    scroll-padding-top: 80px;
+}
+
+body {
+    font-family: "Segoe UI", Tahoma, Arial, sans-serif;
+    color: var(--dark);
+    line-height: 1.7;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul {
+    list-style: none;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+/* Pseudo-element: لون تحديد النص */
+::selection {
+    background: var(--primary);
+    color: var(--white);
+}
+
+/* Accessibility: إطار واضح للي بيتنقل بالكيبورد */
+:focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 2px;
+}
+
+.container {
+    width: 90%;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.skip-link {
+    position: absolute;
+    top: -60px;
+    right: 10px;
+    background: var(--dark);
+    color: var(--white);
+    padding: 8px 16px;
+    border-radius: 0 0 8px 8px;
+    z-index: 200;
+    transition: top 0.3s;
+}
+
+.skip-link:focus {
+    top: 0;
+}
+
+/* ====== Animations ====== */
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-15px);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+/* موجة بتطلع من زرار الواتساب */
+@keyframes ring {
+    0% {
+        box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.6);
+    }
+    100% {
+        box-shadow: 0 0 0 18px rgba(37, 211, 102, 0);
+    }
+}
+
+/* ====== Header ====== */
+.header {
+    background: var(--white);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+}
+
+.logo {
+    font-size: 26px;
+    font-weight: bold;
+    color: var(--primary);
+}
+
+.logo span {
+    color: var(--dark);
+}
+
+.nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 22px;
+}
+
+.nav a {
+    color: var(--gray);
+    position: relative;
+    transition: color 0.3s;
+}
+
+/* خط بيتمد تحت اللينك عند الـ hover */
+.nav a::after {
+    content: "";
+    position: absolute;
+    bottom: -4px;
+    right: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--primary);
+    transform: scaleX(0);
+    transition: transform 0.3s;
+}
+
+.nav a:hover {
+    color: var(--primary);
+}
+
+.nav a:hover::after {
+    transform: scaleX(1);
+}
+
+/* ====== Button ====== */
+.btn {
+    display: inline-block;
+    background: var(--primary);
+    color: var(--white);
+    padding: 12px 28px;
+    border: 2px solid var(--primary);
+    border-radius: 8px;
+    font-size: 16px;
+    font-family: inherit;
+    cursor: pointer;
+    transition: background 0.3s, color 0.3s, transform 0.2s;
+}
+
+.btn:hover {
+    background: var(--primary-dark);
+    border-color: var(--primary-dark);
+}
+
+.btn:active {
+    transform: scale(0.96);
+}
+
+.btn-outline {
+    background: transparent;
+    color: var(--primary);
+}
+
+.btn-outline:hover {
+    color: var(--white);
+}
+
+/* ====== Hero ====== */
+.hero {
+    background: linear-gradient(135deg, #e6f4f1, #ffffff);
+    padding: 80px 0;
+}
+
+.hero-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+}
+
+.hero-text {
+    animation: fadeUp 1s ease;
+}
+
+.hero-text h1 {
+    font-size: 44px;
+    line-height: 1.3;
+    margin-bottom: 15px;
+}
+
+.hero-text h1 em {
+    font-style: normal;
+    color: var(--primary);
+}
+
+.hero-text p {
+    color: var(--gray);
+    font-size: 18px;
+    max-width: 520px;
+    margin-bottom: 25px;
+}
+
+.hero-text .btn {
+    margin-bottom: 8px;
+}
+
+.hero-icon {
+    font-size: 180px;
+    animation: float 3s ease-in-out infinite;
+}
+
+/* ====== Stats ====== */
+.stats {
+    background: var(--primary);
+    color: var(--white);
+    padding: 30px 0;
+}
+
+.stats-content {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    text-align: center;
+}
+
+.stat strong {
+    display: block;
+    font-size: 32px;
+}
+
+/* ====== Sections ====== */
+.section {
+    padding: 70px 0;
+}
+
+.section-gray {
+    background: var(--light);
+}
+
+.section-title {
+    text-align: center;
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+
+/* خط صغير تحت عنوان كل قسم */
+.section-title::after {
+    content: "";
+    display: block;
+    width: 60px;
+    height: 4px;
+    background: var(--primary);
+    border-radius: 2px;
+    margin: 8px auto 0;
+}
+
+.section-desc {
+    text-align: center;
+    color: var(--gray);
+    margin-bottom: 35px;
+}
+
+/* العنوان اللي مالوش وصف بعده محتاج مسافة */
+.section-title + .cards,
+.section-title + .testimonials,
+.section-title + .faq {
+    margin-top: 35px;
+}
+
+/* ====== Cards ====== */
+.cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.card {
+    background: var(--white);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s, box-shadow 0.3s;
+    animation: fadeUp 1s ease;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.14);
+}
+
+/* الـ gradient بيظهر لو الصورة ما حملتش */
+.card-img {
+    height: 190px;
+    position: relative;
+    overflow: hidden;
+}
+
+.card-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s;
+}
+
+.card:hover .card-img img {
+    transform: scale(1.1);
+}
+
+.img-1 { background: linear-gradient(135deg, #1e6f5c, #7fc8a9); }
+.img-2 { background: linear-gradient(135deg, #2b4c7e, #8fb8de); }
+.img-3 { background: linear-gradient(135deg, #d97706, #fcd34d); }
+.img-4 { background: linear-gradient(135deg, #4b5563, #9ca3af); }
+.img-5 { background: linear-gradient(135deg, #7c3aed, #c4b5fd); }
+.img-6 { background: linear-gradient(135deg, #be123c, #fda4af); }
+
+.badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 1;
+    background: var(--primary);
+    color: var(--white);
+    padding: 3px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+}
+
+.badge.rent {
+    background: var(--accent);
+}
+
+.card-body {
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.location {
+    color: var(--gray);
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.features li {
+    background: var(--light);
+    padding: 2px 10px;
+    border-radius: 6px;
+    font-size: 13px;
+}
+
+.card-text {
+    color: var(--gray);
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+
+/* margin-top: auto بيزق الفوتر لآخر الكارت مهما كان طول النص */
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    margin-top: auto;
+    padding-top: 12px;
+    border-top: 1px solid var(--light);
+}
+
+.price {
+    color: var(--primary);
+    font-weight: bold;
+    font-size: 17px;
+}
+
+.card-link {
+    color: var(--accent);
+    font-size: 14px;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.card-link::after {
+    content: " ←";
+}
+
+.card-link:hover {
+    text-decoration: underline;
+}
+
+/* ====== About ====== */
+.about {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: center;
+}
+
+.about-img {
+    background: linear-gradient(135deg, #1e6f5c, #7fc8a9);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+}
+
+.about-img img {
+    width: 100%;
+    height: 320px;
+    object-fit: cover;
+}
+
+.about-img figcaption {
+    background: var(--white);
+    color: var(--gray);
+    font-size: 13px;
+    text-align: center;
+    padding: 8px;
+}
+
+.about-text .section-title {
+    text-align: right;
+    margin-bottom: 20px;
+}
+
+.about-text .section-title::after {
+    margin-right: 0;
+}
+
+.about-text p {
+    color: var(--gray);
+    margin-bottom: 12px;
+}
+
+.about-text h3 {
+    margin: 18px 0 10px;
+}
+
+.check-list li {
+    padding-right: 28px;
+    position: relative;
+    margin-bottom: 6px;
+}
+
+.check-list li::before {
+    content: "✔";
+    position: absolute;
+    right: 0;
+    color: var(--primary);
+    font-weight: bold;
+}
+
+/* ====== Services ====== */
+.services {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.service {
+    background: var(--white);
+    padding: 30px 20px;
+    border: 1px solid var(--light);
+    border-radius: var(--radius);
+    text-align: center;
+    box-shadow: var(--shadow);
+    transition: border-color 0.3s;
+}
+
+.service:hover {
+    border-color: var(--primary);
+}
+
+.service-icon {
+    font-size: 45px;
+}
+
+.service:hover .service-icon {
+    animation: pulse 0.8s ease infinite;
+}
+
+.service p {
+    color: var(--gray);
+}
+
+/* ====== Table ====== */
+.table-wrapper {
+    overflow-x: auto;
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+.table {
+    width: 100%;
+    min-width: 520px;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+.table caption {
+    padding: 12px;
+    color: var(--gray);
+    font-size: 14px;
+}
+
+.table th,
+.table td {
+    padding: 12px 15px;
+}
+
+.table thead th {
+    background: var(--primary);
+    color: var(--white);
+}
+
+/* Pseudo-class: تلوين الصفوف الزوجية */
+.table tbody tr:nth-child(even) {
+    background: var(--light);
+}
+
+.table tbody tr:hover {
+    background: #e6f4f1;
+}
+
+/* ====== Testimonials ====== */
+.testimonials {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.testimonial {
+    background: var(--light);
+    padding: 40px 22px 22px;
+    border-radius: var(--radius);
+    position: relative;
+}
+
+.testimonial::before {
+    content: "❞";
+    position: absolute;
+    top: 5px;
+    right: 18px;
+    font-size: 36px;
+    color: var(--primary);
+}
+
+.testimonial blockquote {
+    margin-bottom: 15px;
+}
+
+.testimonial figcaption {
+    font-weight: bold;
+}
+
+.testimonial figcaption span {
+    display: block;
+    color: var(--gray);
+    font-size: 13px;
+    font-weight: normal;
+}
+
+/* ====== FAQ ====== */
+.faq {
+    max-width: 750px;
+    margin: 0 auto;
+}
+
+.faq details {
+    background: var(--white);
+    border-radius: 8px;
+    margin-bottom: 12px;
+    box-shadow: var(--shadow);
+}
+
+.faq summary {
+    padding: 15px 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.faq summary:hover,
+.faq details[open] summary {
+    color: var(--primary);
+}
+
+.faq details p {
+    padding: 0 18px 15px;
+    color: var(--gray);
+    animation: fadeUp 0.4s ease;
+}
+
+/* ====== Form ====== */
+.form {
+    max-width: 650px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    background: var(--white);
+    padding: 30px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+.field-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    border: none;
+}
+
+.field label,
+.field legend {
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.field legend {
+    margin-bottom: 5px;
+}
+
+.required {
+    color: var(--error);
+}
+
+.field input,
+.field select,
+.field textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    font-size: 16px;
+    font-family: inherit;
+    background: var(--white);
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.field textarea {
+    resize: vertical;
+}
+
+.field input::placeholder,
+.field textarea::placeholder {
+    color: #9ca3af;
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(30, 111, 92, 0.15);
+}
+
+/* --- Validation ---
+   :placeholder-shown = الحقل لسه فاضي
+   فبنستنى المستخدم يكتب حاجة قبل ما نظهر الأحمر أو الأخضر */
+.field input:not(:placeholder-shown):invalid,
+.field textarea:not(:placeholder-shown):invalid {
+    border-color: var(--error);
+}
+
+.field input:not(:placeholder-shown):valid,
+.field textarea:not(:placeholder-shown):valid {
+    border-color: var(--success);
+}
+
+.error {
+    display: none;
+    color: var(--error);
+    font-size: 13px;
+}
+
+/* ~ بيختار الـ small اللي بعد الحقل الغلط */
+.field input:not(:placeholder-shown):invalid ~ .error,
+.field textarea:not(:placeholder-shown):invalid ~ .error {
+    display: block;
+}
+
+.choice {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: normal;
+    cursor: pointer;
+    margin-left: 18px;
+}
+
+/* Attribute selector */
+.choice input[type="radio"],
+.choice input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    padding: 0;
+    accent-color: var(--primary);
+}
+
+/* ====== Footer ====== */
+.footer {
+    background: var(--dark);
+    color: #d1d5db;
+    padding-top: 45px;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1.5fr;
+    gap: 30px;
+    padding-bottom: 30px;
+}
+
+.footer h3 {
+    color: var(--white);
+    margin-bottom: 10px;
+}
+
+.footer address {
+    font-style: normal;
+}
+
+.footer a {
+    transition: color 0.3s;
+}
+
+.footer a:hover {
+    color: #7fc8a9;
+}
+
+.copyright {
+    text-align: center;
+    font-size: 14px;
+    padding: 15px;
+    border-top: 1px solid #374151;
+}
+
+/* ====== WhatsApp fixed button ====== */
+.whatsapp {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--whatsapp);
+    color: var(--white);
+    font-weight: bold;
+    padding: 12px 18px;
+    border-radius: 50px;
+    animation: ring 1.8s ease-out infinite;
+    transition: transform 0.3s;
+}
+
+.whatsapp:hover {
+    transform: scale(1.08);
+}
+
+.whatsapp svg {
+    fill: var(--white);
+}
+
+/* ====== Responsive ====== */
+
+/* Tablet */
+@media (max-width: 900px) {
+    .cards,
+    .services,
+    .testimonials {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .header-content {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .hero-text h1 {
+        font-size: 34px;
+    }
+
+    .hero-icon {
+        font-size: 130px;
+    }
+
+    .about {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-content {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+    html {
+        scroll-padding-top: 130px;
+    }
+
+    .nav {
+        gap: 6px 14px;
+        font-size: 14px;
+    }
+
+    .hero {
+        padding: 50px 0;
+    }
+
+    .hero-content {
+        flex-direction: column-reverse;
+        text-align: center;
+    }
+
+    .hero-text h1 {
+        font-size: 28px;
+    }
+
+    .hero-icon {
+        font-size: 100px;
+    }
+
+    .stats-content {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .section {
+        padding: 50px 0;
+    }
+
+    .cards,
+    .services,
+    .testimonials,
+    .field-row,
+    .footer-content {
+        grid-template-columns: 1fr;
+    }
+
+    .form {
+        padding: 20px;
+    }
+
+    /* على الموبايل الزرار يبقى دايرة بالأيقونة بس */
+    .whatsapp {
+        padding: 14px;
+        bottom: 15px;
+        left: 15px;
+    }
+
+    .whatsapp span {
+        display: none;
+    }
+}
+
+/* Accessibility: نوقف الحركة للي مفعّل تقليل الحركة في جهازه */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation: none !important;
+        transition: none !important;
+    }
+
+    html {
+        scroll-behavior: auto;
+    }
+}
